@@ -1,5 +1,5 @@
 from tabuleiro import Tabuleiro
-from peca import Peca
+from peca import Peca, Torre
 from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
 
 import os
@@ -36,13 +36,22 @@ def inicializa_pecas(
 
         # icone = ['♔', '♚']
 
+        if id[0] == "T":  # Significa que é uma torre
+            obj_peca = Torre(id
+                , mapeamento_posicao_inicial[id][1]
+                , mapeamento_posicao_inicial[id][0]
+                , icone[0 if id[1] == "P" else 1]  # Verifica, pelo ID, qual é a cor. Assim decide qual é o ícone correto.
+                )
+        else:
+            obj_peca = Peca(id
+                , mapeamento_posicao_inicial[id][1]
+                , mapeamento_posicao_inicial[id][0]
+                , icone[0 if id[1] == "P" else 1]  # Verifica, pelo ID, qual é a cor. Assim decide qual é o ícone correto.
+                )
+
         # Cria todos os objetos de Peça e preenche a lista
         lista_pecas_criadas.append(
-            Peca(id
-                 , mapeamento_posicao_inicial[id][1]
-                 , mapeamento_posicao_inicial[id][0]
-                 , icone[0 if id[1] == "P" else 1]  # Verifica, pelo ID, qual é a cor. Assim decide qual é o ícone correto.
-                )
+            obj_peca
             )
     return lista_pecas_criadas
 
@@ -130,6 +139,7 @@ if __name__ == "__main__":
         if not casa.livre:  # Se não está livre, então tem peça
 
             peca = casa.peca  # Tenho agora a peça que eu selecionei
+            print(peca)
 
             lista_possibilidades = peca.calcula_movimento()
 
