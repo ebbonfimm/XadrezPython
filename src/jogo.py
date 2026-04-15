@@ -114,6 +114,8 @@ def captura_coordenada(texto: str) -> list[int, int]:
 
 if __name__ == "__main__":
 
+    clear_cmd()
+
     tab = Tabuleiro()
 
     # Cria as peças, retornando uma lista com todas elas (Lista de objetos do tipo Peca).
