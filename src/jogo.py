@@ -1,5 +1,5 @@
 from tabuleiro import Tabuleiro
-from peca import Peca, Torre
+from peca import Peca, Peao, Torre, Rei, Dama, Cavalo, Bispo
 from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
 
 import os
@@ -34,25 +34,20 @@ def inicializa_pecas(
         indice_icone = [id[0] == x[0] for x in mapeamento_icones].index(True)
         icone = mapeamento_icones[list(mapeamento_icones.keys())[indice_icone]]
 
-        # icone = ['♔', '♚']
+        tipo_da_peca = id[0]
+        dados_objeto = [id, mapeamento_posicao_inicial[id][1], mapeamento_posicao_inicial[id][0], icone[0 if id[1] == "P" else 1]]
 
-        if id[0] == "T":  # Significa que é uma torre
-            obj_peca = Torre(id
-                , mapeamento_posicao_inicial[id][1]
-                , mapeamento_posicao_inicial[id][0]
-                , icone[0 if id[1] == "P" else 1]  # Verifica, pelo ID, qual é a cor. Assim decide qual é o ícone correto.
-                )
-        else:
-            obj_peca = Peca(id
-                , mapeamento_posicao_inicial[id][1]
-                , mapeamento_posicao_inicial[id][0]
-                , icone[0 if id[1] == "P" else 1]  # Verifica, pelo ID, qual é a cor. Assim decide qual é o ícone correto.
-                )
+        # Define qual é a classe que deverá ser utilizada, dependendo da nomenclatura da peça.
+        if tipo_da_peca == "T": obj_peca = Torre(*dados_objeto)
+        elif tipo_da_peca == "P": obj_peca = Peao(*dados_objeto)
+        elif tipo_da_peca == "D": obj_peca = Dama(*dados_objeto)
+        elif tipo_da_peca == "R": obj_peca = Rei(*dados_objeto)
+        elif tipo_da_peca == "C": obj_peca = Cavalo(*dados_objeto)
+        elif tipo_da_peca == "B": obj_peca = Bispo(*dados_objeto)
 
         # Cria todos os objetos de Peça e preenche a lista
-        lista_pecas_criadas.append(
-            obj_peca
-            )
+        lista_pecas_criadas.append(obj_peca)
+
     return lista_pecas_criadas
 
 
@@ -149,6 +144,12 @@ if __name__ == "__main__":
                 contador+=1
 
             opt = int(input("Opção >> "))
+
+            #Thiago
+            while opt > len(lista_possibilidades):
+                print("Selecione outra peça !!!") 
+                opt = int(input("Opção >> "))
+            #fim
 
             peca.mover_peca(lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1])
 
