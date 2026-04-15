@@ -53,6 +53,29 @@ class Peao(Peca):
         super().__init__(id, pos_x, pos_y, icone)
 
 
+    def calcula_movimento(self):
+
+        movimentos = []
+
+        if self.casa_inicial:
+            iterador = range(1, 3)
+            
+            if self.cor == 0:
+                for i in iterador:
+                    movimentos.append([self.pos_x, self.pos_y-i])
+            else:
+                for i in iterador:
+                    movimentos.append([self.pos_x, self.pos_y+i])
+        
+        else:
+            if self.cor == 0:
+                movimentos.append([self.pos_x, self.pos_y-1])
+            else:
+                movimentos.append([self.pos_x, self.pos_y+1])
+
+        return super().calcula_movimento(movimentos)
+
+
 class Cavalo(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
