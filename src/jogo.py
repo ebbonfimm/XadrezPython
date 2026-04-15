@@ -4,12 +4,6 @@ from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
 
 tab = Tabuleiro()
 
-def recebe_nova_posicao() -> list[int, int]:
-    pos_x = int(input("Novo X >> "))
-    pos_y = int(input("Novo Y >> "))
-
-    return [pos_x, pos_y]
-
 
 def inicializa_pecas(
         mapeamento_posicao_inicial: dict[list[int, int]], 
@@ -92,6 +86,14 @@ def preenche_tabuleiro(tabuleiro: Tabuleiro ,pecas: list[Peca]) -> Tabuleiro:
     return tabuleiro
 
 
+def captura_coordenada(texto: str) -> list[int, int]:
+    print(texto)
+    x = int(input("X >> "))
+    y = int(input("Y >> "))
+
+    return [x, y]
+    
+
 if __name__ == "__main__":
 
     # Cria as peças, retornando uma lista com todas elas (Lista de objetos do tipo Peca).
@@ -106,23 +108,15 @@ if __name__ == "__main__":
     #######################################################################################
 
     # Testando funcionalidade de escolher qual peça quero mexer.
-    print("\nQual peça deseja mexer? ")
-    coord_x = int(input("Digite X >> "))
-    coord_y = int(input("Digite Y >> "))
+    par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
 
-    casa = _tab.procura_casa((coord_x, coord_y))
+    casa = _tab.procura_casa((par_coord[0], par_coord[1]))
     if not casa.livre:  # Se não está livre, então tem peça
-        print(casa.exibe_descricao())
 
         peca = casa.peca  # Tenho agora a peça que eu selecionei
-        casa.desocupar_casa()
+        movimentos = peca.calcula_movimento()
 
-        nova_pos = recebe_nova_posicao()
-        peca.pos_x = nova_pos[0]
-        peca.pos_y = nova_pos[1]
+        
 
-        _tab.procura_casa((peca.pos_x, peca.pos_y)).ocupar_casa(peca)
-
-    print("Casa Vazia!")
-
-    imprime_tabuleiro(tab)
+        imprime_tabuleiro(tab)
+    

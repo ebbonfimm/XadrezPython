@@ -17,8 +17,9 @@ Estipulei algumas regras para esse projeto:
 
 Bom, de maneira geral essas são as regras.
 
+## Para as cores:
+
+- 0 -> Casa Branca
+- 1 -> Casa Preta
+
 ### Funcionalidades a serem implementadas
-
-Tabuleiro
-
-- [ ]

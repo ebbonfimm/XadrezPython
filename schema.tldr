@@ -35,8 +35,8 @@
 	},
 	"records": [
 		{
-			"x": 51.65096434373703,
-			"y": 894.1922490167645,
+			"x": 138.91248367081465,
+			"y": 644.0138403051787,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -131,8 +131,8 @@
 			"typeName": "user"
 		},
 		{
-			"x": 1081.4829928203949,
-			"y": 898.4775173864248,
+			"x": 1168.7445121474725,
+			"y": 648.299108674839,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -217,9 +217,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 562.7207980590966,
-			"y": -254.18140265270677,
-			"z": 0.5444037709009485,
+			"x": 1094.9486685945185,
+			"y": 80.52358709846719,
+			"z": 0.32628619377099427,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -246,6 +246,37 @@
 			},
 			"parentId": "page:page",
 			"index": "a2sV3KQV",
+			"typeName": "shape"
+		},
+		{
+			"x": 34.77151920367476,
+			"y": 493.5618236809066,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:IdtTdTXIXpYRzQ7iSgMW3",
+			"type": "draw",
+			"props": {
+				"segments": [
+					{
+						"type": "free",
+						"path": "AAAAAAAAAAAAAAA/j7rsNQAAmr6kOgAAmr6aQgAApLqPOgAAAACkOgAAj7qUQgAA9sD2QAAAj7ofRAAAmr6aPgAAAACPOgAAj7r2QAAA9sDxQAAAAACkOgAAAACPPgAAAACkOgAAmj6aPgAAmj6POgAAH0T2QAAA9kCPOgAAmkIAAAAAjz4AAAAAIUQAAAAAmkIAAAAAlEIAAAAA9kAAAAAAmkIAAAAAjzoAAAAAmkIAAAAAjzoAAAAA"
+					}
+				],
+				"color": "black",
+				"fill": "none",
+				"dash": "draw",
+				"size": "m",
+				"isComplete": true,
+				"isClosed": false,
+				"isPen": false,
+				"scale": 1,
+				"scaleX": 1,
+				"scaleY": 1
+			},
+			"parentId": "page:page",
+			"index": "aIorPiRV",
 			"typeName": "shape"
 		},
 		{
@@ -288,6 +319,37 @@
 			},
 			"parentId": "page:page",
 			"index": "a4fQNMIV",
+			"typeName": "shape"
+		},
+		{
+			"x": 7.561105662744126,
+			"y": 495.2109363589502,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:d_qOUsjkBSOfRLHHLedFV",
+			"type": "draw",
+			"props": {
+				"segments": [
+					{
+						"type": "free",
+						"path": "AAAAAAAAAAAAAAA/AAAKQAAA8UCkOgAA9kDxQAAAjzrxQAAAmkL2QAAAjzqPOgAAAAD2QAAAmj6aPgAA9kCPPgAAAACkOgAAAAAAAAAAAACaPgAAAACPOgAAAAD2QAAAAACaPgAAAADxQAAAAACPOgAAmr6aQgAApLqkOgAAj7qPOgAAmr72QAAAmr6POgAAj7oAAAAAmr6POgAApLoAAAAAmr4AAAAA"
+					}
+				],
+				"color": "black",
+				"fill": "none",
+				"dash": "draw",
+				"size": "m",
+				"isComplete": true,
+				"isClosed": false,
+				"isPen": false,
+				"scale": 1,
+				"scaleX": 1,
+				"scaleY": 1
+			},
+			"parentId": "page:page",
+			"index": "aHJEY5QV",
 			"typeName": "shape"
 		},
 		{
@@ -349,9 +411,13 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:O6oSLhlvgJNxSRMRSzGnK",
+			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
+				"shape:vrJrNkbxAcgXyki0ljsHN",
+				"shape:stzQ22r2WUMfLW0OPVvFh",
+				"shape:foCOy7bw3ca3mG9LLjBkF",
+				"shape:XFGVNlqoT4QF3CfaBsyfN",
 				"shape:O6oSLhlvgJNxSRMRSzGnK"
 			],
 			"hoveredShapeId": null,
@@ -489,8 +555,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 403.8575332130078,
-			"y": 896.0458819447462,
+			"x": 491.1190525400854,
+			"y": 645.8674732331604,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -614,6 +680,74 @@
 			"typeName": "shape"
 		},
 		{
+			"x": -25.421220369076252,
+			"y": 55.99619528114118,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:fV3n_ummpzBeoSK_4YwEh",
+			"type": "geo",
+			"props": {
+				"w": 34.63143870986397,
+				"h": 129.004738983802,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aJdXMZHV",
+			"typeName": "shape"
+		},
+		{
+			"x": -315.6657582964972,
+			"y": 162.91392549386336,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:--lKjktCFHn2KckXjPVKG",
+			"type": "draw",
+			"props": {
+				"segments": [
+					{
+						"type": "free",
+						"path": "AAAAAAAAAAAAAAA/j7rsNQAAAACkOgAAAACaQgAAAACPOgAAAACaQgAAAADxQAAAAACkOgAAAACaPgAAAACPOgAAjzqaPgAA8UCPOgAApDr2QAAAH0QAAAAApDqPOgAAlEIAAAAApDoAAAAAjzoAAAAApDoAAAAA8UDxwAAApDrxwAAAjzqkugAAmkKawgAA8UDxwAAAmkLxwAAAAACkugAAmj6avgAAjzrxwAAAAACkugAAAACPugAAAACPOgAAAAAhRAAAAADxRAAAAACaPgAAAADzRAAAAADzRAAAmj4fRAAA9kDzRAAAmj5sRwAAAACaQgAAjzqaQgAAAAAfRAAAAADzRAAAAACPPgAAmr7IRQAAmsLxQAAAAACaQgAAmr6POgAAj7qkOgAAmr4AAAAAj7oAAAAApLoAAAAAAACkugAAj7qPugAA9sCawgAAAADxwAAAmr6awgAAAADzxAAAAACawgAApDofxAAA8UDxwAAA9kDzxAAAjzqawgAAxUUfxAAAIUQhxAAAlEKPvgAAmkKkugAAxUUfxAAAmkIAAAAA9kCkugAAjzoAAAAAjzoAAAAApDoAAAAA8UAAAAAA"
+					}
+				],
+				"color": "black",
+				"fill": "none",
+				"dash": "draw",
+				"size": "m",
+				"isComplete": true,
+				"isClosed": false,
+				"isPen": false,
+				"scale": 1,
+				"scaleX": 1,
+				"scaleY": 1
+			},
+			"parentId": "page:page",
+			"index": "aGlP2mGV",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "page:page",
 			"name": "Schema",
@@ -631,9 +765,6 @@
 			"followingUserId": null,
 			"opacityForNextShape": 1,
 			"stylesForNextShape": {
-				"tldraw:color": "blue",
-				"tldraw:font": "draw",
-				"tldraw:size": "s",
 				"tldraw:geo": "rectangle"
 			},
 			"brush": null,
@@ -649,7 +780,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1284.72216796875,
+				"w": 1083.333251953125,
 				"h": 602.7777709960938
 			},
 			"insets": [
@@ -721,8 +852,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 742.032447809559,
-			"y": 895.3482540441585,
+			"x": 829.2939671366366,
+			"y": 645.1698453325727,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -770,8 +901,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -313.31168444085085,
-			"y": 892.3386721456652,
+			"x": -226.05016511377323,
+			"y": 642.1602634340794,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
