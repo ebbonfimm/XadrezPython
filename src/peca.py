@@ -43,3 +43,4 @@ class Peca:
 
     def __str__(self):
         return f"{id}"
+    

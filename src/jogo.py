@@ -87,6 +87,14 @@ def preenche_tabuleiro(tabuleiro: Tabuleiro ,pecas: list[Peca]) -> Tabuleiro:
 
 
 def captura_coordenada(texto: str) -> list[int, int]:
+    """Método para capturar a coordenada X e Y vindo do usuário.
+
+    Args:
+        texto (str): Texto que aparece na interação com o usuário.
+
+    Returns:
+        list[int, int]: [posicao x, posicao y]
+    """
     print(texto)
     x = int(input("X >> "))
     y = int(input("Y >> "))
@@ -116,6 +124,7 @@ if __name__ == "__main__":
         peca = casa.peca  # Tenho agora a peça que eu selecionei
         movimentos = peca.calcula_movimento()
 
+        print(movimentos)
         
 
         imprime_tabuleiro(tab)
