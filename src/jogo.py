@@ -2,7 +2,11 @@ from tabuleiro import Tabuleiro
 from peca import Peca
 from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
 
-tab = Tabuleiro()
+import os
+
+
+def clear_cmd():
+    os.system('cls')
 
 
 def inicializa_pecas(
@@ -27,8 +31,10 @@ def inicializa_pecas(
     for id in mapeamento_posicao_inicial.keys():  # Possui as 32 peças do tabuleiro para serem iteradas
 
         # Lógica para capturar o ícone adequado para a peça, a depender da sua cor
-        indice_icone = [id[0] == x[0] for x in mapeamento_icone_pecas].index(True)
-        icone = mapeamento_icone_pecas[list(mapeamento_icone_pecas.keys())[indice_icone]]
+        indice_icone = [id[0] == x[0] for x in mapeamento_icones].index(True)
+        icone = mapeamento_icones[list(mapeamento_icones.keys())[indice_icone]]
+
+        # icone = ['♔', '♚']
 
         # Cria todos os objetos de Peça e preenche a lista
         lista_pecas_criadas.append(
@@ -104,28 +110,44 @@ def captura_coordenada(texto: str) -> list[int, int]:
 
 if __name__ == "__main__":
 
+    tab = Tabuleiro()
+
     # Cria as peças, retornando uma lista com todas elas (Lista de objetos do tipo Peca).
     pecas_criadas = inicializa_pecas(mapeamento_posicao_inicial=mapeamento_posicao_inicial_pecas, mapeamento_icones=mapeamento_icone_pecas)
 
-    # Posiciona as peças na coordenada inicial, retornando um tabuleiro preenchido.
+    # # Posiciona as peças na coordenada inicial, retornando um tabuleiro preenchido.
     _tab = preenche_tabuleiro(tab, pecas_criadas)
 
     imprime_tabuleiro(_tab)
 
-
     #######################################################################################
 
-    # Testando funcionalidade de escolher qual peça quero mexer.
-    par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
+    for i in range(0,1000):
+        # Testando funcionalidade de escolher qual peça quero mexer.
+        par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
 
-    casa = _tab.procura_casa((par_coord[0], par_coord[1]))
-    if not casa.livre:  # Se não está livre, então tem peça
+        casa = _tab.procura_casa((par_coord[0], par_coord[1]))
+        if not casa.livre:  # Se não está livre, então tem peça
 
-        peca = casa.peca  # Tenho agora a peça que eu selecionei
-        movimentos = peca.calcula_movimento()
+            peca = casa.peca  # Tenho agora a peça que eu selecionei
 
-        print(movimentos)
-        
+            lista_possibilidades = peca.calcula_movimento()
 
-        imprime_tabuleiro(tab)
+            contador = 1
+            for i in lista_possibilidades:
+                print(f"{contador} - {i}")
+                contador+=1
+
+            opt = int(input("Opção >> "))
+
+            peca.mover_peca(lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1])
+
+            casa.desocupar_casa()
+
+            nova_casa = _tab.procura_casa((lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1]))
+            nova_casa.ocupar_casa(peca)
+
+            clear_cmd()
+
+            imprime_tabuleiro(_tab)
     

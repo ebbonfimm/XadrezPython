@@ -40,6 +40,23 @@ class Peca:
         return movimentos_possíveis
 
 
+    def mover_peca(self, x: int, y: int) -> list[int, int]:
+        """_summary_
+
+        Args:
+            x (int): Nova posição X no tabuleiro
+            y (int): Nova posição Y no tabuleiro
+
+        Returns:
+            list[int, int]: Posição Atual, após mover a peça.
+        """
+        self.pos_x = x
+        self.pos_y = y
+
+        self.casa_inicial = False
+
+        return [x, y]
+
 
     def __str__(self):
         return f"{id}"
