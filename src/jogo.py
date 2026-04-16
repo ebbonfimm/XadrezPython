@@ -74,7 +74,10 @@ def imprime_tabuleiro(tab: Tabuleiro, peca_colorida: bool = False) -> None:
     """
     contador: int = 0
     linhas: list[int] = range(0, 8)
-
+    # Adição de 4 espaços para o número das colunas fica visualmente coerente ao tabuleiro.
+    print(" "*4, end="")
+    # Impressão dos números das colunas.
+    [print(x, end=" ") for x in range(0, 8)]
     # Quebra a linha e adiciona a borda superior do tabuleiro para começar a imprimir as linhas.
     print("\n  ┌" + "═"*17 + "┐")
     # Itera por cada uma das linhas do tabuleiro.
@@ -93,10 +96,6 @@ def imprime_tabuleiro(tab: Tabuleiro, peca_colorida: bool = False) -> None:
         contador+=1
     # Depois de imprimir a última linha do tabuleiro, é adicionado uma borda.
     print("  └" + "═"*17, end="┘\n")
-    # Adição de 4 espaços para o número das colunas fica visualmente coerente ao tabuleiro.
-    print(" "*4, end="")
-    # Impressão dos números das colunas.
-    [print(x, end=" ") for x in range(0, 8)]
     # Quebra a linha ao final de todas as impressões
     print()
 

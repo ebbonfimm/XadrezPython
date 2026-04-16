@@ -61,7 +61,6 @@ class Peca:
         return result
 
 
-
     def __str__(self):
         return f"{self.id}"
     
@@ -102,6 +101,28 @@ class Cavalo(Peca):
 class Bispo(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
+
+
+    def calcula_movimento(self,):
+
+        movimentos = []
+
+        limite_atual = 1
+        limite_maximo = 7
+
+        while limite_atual <= limite_maximo:
+            superior_esquerda = [self.pos_x - limite_atual, self.pos_y - limite_atual]
+            superior_direita = [self.pos_x + limite_atual, self.pos_y - limite_atual]
+            inferior_esquerda = [self.pos_x - limite_atual, self.pos_y + limite_atual]
+            inferior_direita = [self.pos_x + limite_atual, self.pos_y + limite_atual]
+
+            movimentos_propagados = [superior_esquerda, superior_direita, inferior_esquerda, inferior_direita]
+            
+            [movimentos.append(mov) for mov in movimentos_propagados]
+
+            limite_atual+=1
+
+        return super().calcula_movimento(movimentos)
 
 
 class Dama(Peca):
