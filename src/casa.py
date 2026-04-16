@@ -65,7 +65,7 @@ class Casa:
         return self.livre
     
 
-    def exibe_descricao(self):
+    def exibe_descricao(self) -> str:
         """Exibe uma descrição detalhada da situação atual da casa em questão.
 
         Returns:

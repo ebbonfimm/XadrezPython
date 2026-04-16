@@ -5,7 +5,7 @@ class Tabuleiro:
         self.tabuleiro = [[Casa(column, row) for column in range(0,8)] for row in range(0,8)]
 
 
-    def procura_casa(self, coordenada: tuple[int, int]):
+    def procura_casa(self, coordenada: list[int, int]) -> Casa:
         """Função usada para retornar para o jogo, a casa que seja usada para ocupar ou ser desocupada.
 
         Args:
