@@ -1,17 +1,27 @@
 from tabuleiro import Tabuleiro
+from casa import Casa
 from peca import Peca, Peao, Torre, Rei, Dama, Cavalo, Bispo
-from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
+from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas, teste_mapeamento_posicao_inicial_pecas
+from cores import coresterminal as ct
 
 import os
+
 
 
 def clear_cmd():
     os.system('cls')
 
 
+def print_peca_colorida(casa: Casa):
+
+    result = casa.__str__()
+
+    print(casa if casa.livre else ct.VERDE + result + ct.FINAL, end=" ")
+
+
 def inicializa_pecas(
-        mapeamento_posicao_inicial: dict[list[int, int]], 
-        mapeamento_icones: dict[list[str, str]]
+        depara_posicao_inicial: dict[list[int, int]], 
+        depara_icones: dict[list[str, str]]
     ) -> list[Peca]:
     """_summary_
     Função responsável por criar todas as 32 peças necessárias para a partida iniciar. Leva em consideração um mapeamento manual feito previamente, com a posição inicial de cada peça e seus respectivos ícones.
@@ -28,14 +38,14 @@ def inicializa_pecas(
     lista_pecas_criadas = []
 
     # Percorre todo o conjunto do mapeamento da posição inicial de cada uma das peças (que foi criado previamente e de forma manual)
-    for id in mapeamento_posicao_inicial.keys():  # Possui as 32 peças do tabuleiro para serem iteradas
+    for id in depara_posicao_inicial.keys():  # Possui as 32 peças do tabuleiro para serem iteradas
 
         # Lógica para capturar o ícone adequado para a peça, a depender da sua cor
-        indice_icone = [id[0] == x[0] for x in mapeamento_icones].index(True)
-        icone = mapeamento_icones[list(mapeamento_icones.keys())[indice_icone]]
+        indice_icone = [id[0] == x[0] for x in depara_icones].index(True)
+        icone = depara_icones[list(depara_icones.keys())[indice_icone]]
 
         tipo_da_peca = id[0]
-        dados_objeto = [id, mapeamento_posicao_inicial[id][1], mapeamento_posicao_inicial[id][0], icone[0 if id[1] == "P" else 1]]
+        dados_objeto = [id, depara_posicao_inicial[id][1], depara_posicao_inicial[id][0], icone[0 if id[1] == "P" else 1]]
 
         # Define qual é a classe que deverá ser utilizada, dependendo da nomenclatura da peça.
         if tipo_da_peca == "T": obj_peca = Torre(*dados_objeto)
@@ -51,7 +61,7 @@ def inicializa_pecas(
     return lista_pecas_criadas
 
 
-def imprime_tabuleiro(tab: Tabuleiro) -> None:
+def imprime_tabuleiro(tab: Tabuleiro, peca_colorida: bool = False) -> None:
     """Imprime o tabuleiro em um formato ornamentado. Esse método será utilizado durante toda a partida para exibir o tabuleiro com seu estado atual.
 
     A impressão contém:
@@ -72,7 +82,11 @@ def imprime_tabuleiro(tab: Tabuleiro) -> None:
         # Imprime o índice de cada linha e adiciona um " │ " no final antes de imprimir as casas daquela linha.
         print(linhas[contador], end=" ║ ")
         # Imprime cada casa da linha que está sendo iterada, dando um espaço entre cada casa.
-        [print(casa, end=" ") for casa in row]
+
+        if peca_colorida:
+            [print_peca_colorida(casa) for casa in row]
+        else:
+            [print(casa, end=" ") for casa in row]
         # Ao final de cada linha, é impresso um "│ " (Não tem um espaço antes, pois na impressão anterior, o último termo já tem um espaço no final).
         print("║ ")
         # Aumenta uma undiade no contador, para que cada linha tenha impresso o seu número correto.
@@ -118,18 +132,27 @@ if __name__ == "__main__":
 
     tab = Tabuleiro()
 
+    # == DESCOMENTAR=ASSIM=QUE=NÃO=ESTIVER=MAIS=TESTANDO===========================================
     # Cria as peças, retornando uma lista com todas elas (Lista de objetos do tipo Peca).
-    pecas_criadas = inicializa_pecas(mapeamento_posicao_inicial=mapeamento_posicao_inicial_pecas, mapeamento_icones=mapeamento_icone_pecas)
+
+    # pecas_criadas = inicializa_pecas(depara_posicao_inicial=mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
+    # =============================================================================================
+
+
+    # =============================================================================================
+    # Cria as peças com os dados de TESTE
+    pecas_criadas = inicializa_pecas(depara_posicao_inicial=teste_mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
+    # =============================================================================================
 
     # # Posiciona as peças na coordenada inicial, retornando um tabuleiro preenchido.
     _tab = preenche_tabuleiro(tab, pecas_criadas)
 
-    imprime_tabuleiro(_tab)
-
     #######################################################################################
 
     for i in range(0,1000):
-        # Testando funcionalidade de escolher qual peça quero mexer.
+        imprime_tabuleiro(_tab, peca_colorida=True)
+
+        # Testando funcionalidade de escolher qual peça quero mexer. (OK)
         par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
 
         casa = _tab.procura_casa((par_coord[0], par_coord[1]))
@@ -147,12 +170,6 @@ if __name__ == "__main__":
 
             opt = int(input("Opção >> "))
 
-            #Thiago
-            while opt > len(lista_possibilidades):
-                print("Selecione outra peça !!!") 
-                opt = int(input("Opção >> "))
-            #fim
-
             peca.mover_peca(lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1])
 
             casa.desocupar_casa()
@@ -161,6 +178,4 @@ if __name__ == "__main__":
             nova_casa.ocupar_casa(peca)
 
             clear_cmd()
-
-            imprime_tabuleiro(_tab)
     
