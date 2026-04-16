@@ -21,7 +21,9 @@ class Peca:
     def calcula_movimento(self, movimentos: list):
         movimentos_possíveis = []
 
-        [movimentos_possíveis.append(mov) for mov in movimentos]
+        for possibilidade_movimento in movimentos:
+            if self.__movimento_eh_valido(possibilidade_movimento):
+                movimentos_possíveis.append(possibilidade_movimento)
 
         return movimentos_possíveis
 
@@ -42,6 +44,22 @@ class Peca:
         self.casa_inicial = False
 
         return [x, y]
+    
+
+    def __movimento_eh_valido(self, par_ordenado: list[int, int]):
+
+        lista_posicoes_validas = range(0, 8)
+
+        result = True
+        if par_ordenado[0] not in lista_posicoes_validas or \
+            par_ordenado[1] not in lista_posicoes_validas or \
+            par_ordenado == [self.pos_x, self.pos_y]:  
+            # Caso o par ordenado recebido seja a própria posição atual 
+
+                result = False
+
+        return result
+
 
 
     def __str__(self):
@@ -60,7 +78,7 @@ class Peao(Peca):
         if self.casa_inicial:
             iterador = range(1, 3)
             
-            if self.cor == 0:
+            if self.cor == 0:  # Caso a cor seja branca, a peça só pode avançar no tabuleiro "para cima".
                 for i in iterador:
                     movimentos.append([self.pos_x, self.pos_y-i])
             else:
@@ -94,6 +112,18 @@ class Dama(Peca):
 class Rei(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
+
+    
+    def calcula_movimento(self):
+
+        movimentos = []
+
+        for x in range(self.pos_x - 1, self.pos_x + 2):
+            for y in range(self.pos_y - 1, self.pos_y + 2):
+
+                movimentos.append([x, y])
+
+        return super().calcula_movimento(movimentos)
 
 
 class Torre(Peca):
