@@ -60,7 +60,7 @@ teste_mapeamento_posicao_inicial_pecas = {
     # 'BB0': [7, 2],
     'BB1': [4, 4],
     'RB0': [7, 3],
-    # 'DB0': [7, 4],
+    'DB0': [7, 4],
     # 'CB0': [7, 1],
     # 'CB1': [7, 6],
 

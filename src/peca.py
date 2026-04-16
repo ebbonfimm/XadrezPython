@@ -184,6 +184,34 @@ class Dama(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
 
+    def calcula_movimento(self):
+
+        movimentos = []
+
+        # Réplica do código Torre.calcula_movimento
+        movs_horizontal = [[i, self.pos_y] for i in range(0, 8)]
+        movs_vertical = [[self.pos_x, i] for i in range(0, 8)]
+        
+        movimentos = [*movs_vertical, *movs_horizontal]
+
+        # Réplica do código Bispo.calcula_movimento
+        limite_atual = 1
+        limite_maximo = 7
+
+        while limite_atual <= limite_maximo:
+            superior_esquerda = [self.pos_x - limite_atual, self.pos_y - limite_atual]
+            superior_direita = [self.pos_x + limite_atual, self.pos_y - limite_atual]
+            inferior_esquerda = [self.pos_x - limite_atual, self.pos_y + limite_atual]
+            inferior_direita = [self.pos_x + limite_atual, self.pos_y + limite_atual]
+
+            movimentos_propagados = [superior_esquerda, superior_direita, inferior_esquerda, inferior_direita]
+            
+            [movimentos.append(mov) for mov in movimentos_propagados]
+
+            limite_atual+=1
+
+        return super().calcula_movimento(movimentos)
+
 
 class Rei(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
