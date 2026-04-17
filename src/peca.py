@@ -136,6 +136,18 @@ class Cavalo(Peca):
         super().__init__(id, pos_x, pos_y, icone)
 
     def calcula_movimento(self):
+        """Regra de movimento do Cavalo
+        Observação: Por ser a regra mais complexa das peças, vou considerar um certo grau de entendimento do processo de desenho da regra para descrever.
+        
+        - Calcular os 4 limites: Considerando o movimento em "L" do cavalo, os limites são, a partir da casa atual da peça, as 4 casas que ficam a 2 casas de distância (Horizontal e Verticalmente).
+        - Com os limites calculados, é preciso verificar se o limite "E" é um limite do X ou Y.
+            - Caso seja do X, é preciso apenas criar as duas novas coordenadas deslocando X uma para cima e uma para baixo
+            - Caso seja do Y, é preciso apenas criar as duas novas coordenadas deslocando Y uma para cima e uma para baixo
+        - Esse processo é realizado para cada limite e considerando que o limite "E" só pode cair em uma das duas regras acima, são criadas 2 possíveis coordenadas para cada. Sendo assim, são geradas 8 posições (2 por limite, que são 4, resultando em 8).
+
+        Returns:
+            list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com 8 posições calculadas)
+        """
 
         movimentos = []
 
@@ -179,7 +191,7 @@ class Bispo(Peca):
         - Para cada iteração do código, o limite atual é incrementado em 1 até que fique igual ao limite máximo
 
         Returns:
-            list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com um número variado de posições calculadas. No máximo 13)
+            list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com um número variado de posições calculadas)
         """
 
         movimentos = []
@@ -207,6 +219,13 @@ class Dama(Peca):
         super().__init__(id, pos_x, pos_y, icone)
 
     def calcula_movimento(self):
+        """Regra de movimento da Dama
+        - União da regra do Bispo com a Regra da Torre
+        - Resulta em um vetor com todas as possibilidades Retilíneas + todas as possibilidades na Diagonal.
+
+        Returns:
+            list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com um número variado de posições calculadas)
+        """
 
         movimentos = []
 
