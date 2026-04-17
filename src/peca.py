@@ -135,6 +135,28 @@ class Cavalo(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
 
+    def calcula_movimento(self):
+
+        movimentos = []
+
+        # Captura os limites dos eixos
+        limites_eixo_x =  [[self.pos_x, self.pos_y-2], [self.pos_x, self.pos_y+2]]
+        limites_eixo_y =  [[self.pos_x-2, self.pos_y], [self.pos_x+2, self.pos_y]]
+
+        # Lista com todos os limites
+        limites = [*limites_eixo_x, *limites_eixo_y]
+
+        for i in limites:
+            if i[0] == self.pos_x:
+                movimentos.append([i[0]-1, i[1]])
+                movimentos.append([i[0]+1, i[1]])
+            
+            else:
+                movimentos.append([i[0], i[1]-1])
+                movimentos.append([i[0], i[1]+1])
+            
+        return super().calcula_movimento(movimentos)
+
 
 class Bispo(Peca):
     def __init__(self, id, pos_x, pos_y, icone):

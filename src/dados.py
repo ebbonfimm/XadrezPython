@@ -78,6 +78,6 @@ teste_mapeamento_posicao_inicial_pecas = {
     # 'BP1': [0, 5],
     # 'RP0': [0, 3],
     # 'DP0': [0, 4],
-    # 'CP0': [0, 1],
+    'CP0': [0, 1],
     # 'CP1': [0, 6],
 }
