@@ -23,9 +23,9 @@ class Casa:
         Returns:
             int: 0 e 1
         """
-        result = 0
+        result = 1
         if (self.pos_x % 2 == 0 and self.pos_y % 2 == 0) or (self.pos_x % 2 == 1 and self.pos_y % 2 == 1):
-            result = 1
+            result = 0
         return result
     
 
