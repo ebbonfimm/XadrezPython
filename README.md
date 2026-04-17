@@ -24,3 +24,17 @@ Bom, de maneira geral essas são as regras.
 - 1 -> Casa Preta
 
 ### Funcionalidades a serem implementadas
+
+- [x] Movimentos das peças
+- [ ] "Castling" ou Roque
+- [ ] Promoção do Peão
+- [ ] Colisão
+- [ ] Cheque e Cheque Mate
+- [ ] Remoção de peças do adversário
+- [ ] Interação com o jogador
+- [ ] Coordenadas Alfanuméricas
+
+### Referência
+
+- https://www.fide.com/FIDE/handbook/LawsOfChess.pdf
+- https://www.chess.com/learn-how-to-play-chess
