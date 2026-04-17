@@ -5,7 +5,7 @@ class Casa:
     def __init__(self, pos_x: int, pos_y: int):
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.coordenada = (pos_x, pos_y)
+        self.coordenada = [pos_x, pos_y]
         self.livre = True
         self.peca: None | Peca = None
         self.cor = self.define_codigo_cor()
@@ -65,7 +65,7 @@ class Casa:
         return self.livre
     
 
-    def exibe_descricao(self):
+    def exibe_descricao(self) -> str:
         """Exibe uma descrição detalhada da situação atual da casa em questão.
 
         Returns:

@@ -14,6 +14,7 @@ Estipulei algumas regras para esse projeto:
 - Não é permitido utilizar inteligência artificial para escrever trechos do código, ao invés disso, cabe a mim ir proativamente buscar os conceitos na internet, com o objetivo de fixar melhor os conceitos que não sei completamente.
 - O jogo deve ser escrito em Português (pt-BR), para agregar no repositório nacional de códigos em Python.
 - O código deve estar bem comentado, para que seja claro a qualquer um que tente compreender o seu funcionamento. A documentação deve incluir a UML, bem como comentários e "type annotations" nas classes, métodos e variáveis.
+- O código deve seguir ao máximo as regras do PEP8 (de escrita de código em Python)
 
 Bom, de maneira geral essas são as regras.
 
