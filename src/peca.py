@@ -246,8 +246,8 @@ class Torre(Peca):
         """Regras de movimento da Torre
         - A torre pode caminhar em movimento retilínio.
         - Sendo assim, são gerados 2 vetores com 8 posições, sendo elas:
-            - Movimento Horizontal: X congelado (no self.pos_x atual) + Todas as possibilidades de Y (de 0 até 8)
-            - Movimento Vertical: Y congelado (no self.pos_y atual) + Todas as possibilidades de X (de 0 até 8)
+            - Movimento Vertical: X congelado (no self.pos_x atual) + Todas as possibilidades de Y (de 0 até 8)
+            - Movimento Horizontal: Y congelado (no self.pos_y atual) + Todas as possibilidades de X (de 0 até 8)
 
         Returns:
             list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com 16 posições calculadas)

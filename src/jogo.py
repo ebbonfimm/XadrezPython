@@ -7,16 +7,31 @@ from cores import coresterminal as ct
 import os
 
 
-
 def clear_cmd():
     os.system('cls')
 
 
-def print_peca_colorida(casa: Casa):
+def print_colorir_tabuleiro(casa: Casa, lista_movimentos: list) -> None:
 
     result = casa.__str__()
 
-    print(casa if casa.livre else ct.VERDE + result + ct.FINAL, end=" ")
+    # Valida se casa faz parte da lista de movimentos
+    if casa.coordenada in lista_movimentos:
+        result = ct.AZUL + result + ct.FINAL
+
+    # Sobreescreve a cor, caso tenha uma peça
+    if not casa.livre:  # Se não está livre, logo, tem uma peça
+        result = ct.VERDE + result + ct.FINAL
+
+    print(result, end=" ")
+
+
+def print_casa_colorida(casa: Casa, lista_movimentos):
+
+    result = casa.__str__()
+
+    print(ct.AZUL + result + ct.FINAL if casa.peca != None and casa.coordenada in lista_movimentos else casa, end=" ")
+
 
 
 def inicializa_pecas(
@@ -61,7 +76,7 @@ def inicializa_pecas(
     return lista_pecas_criadas
 
 
-def imprime_tabuleiro(tab: Tabuleiro, peca_colorida: bool = False) -> None:
+def imprime_tabuleiro(tab: Tabuleiro, colorir = False, lista_movimentos = []) -> None:
     """Imprime o tabuleiro em um formato ornamentado. Esse método será utilizado durante toda a partida para exibir o tabuleiro com seu estado atual.
 
     A impressão contém:
@@ -84,12 +99,14 @@ def imprime_tabuleiro(tab: Tabuleiro, peca_colorida: bool = False) -> None:
     for row in tab.tabuleiro:
         # Imprime o índice de cada linha e adiciona um " │ " no final antes de imprimir as casas daquela linha.
         print(linhas[contador], end=" ║ ")
-        # Imprime cada casa da linha que está sendo iterada, dando um espaço entre cada casa.
 
-        if peca_colorida:
-            [print_peca_colorida(casa) for casa in row]
+        # Coloração da Casa:
+        if colorir:
+            [print_colorir_tabuleiro(casa, lista_movimentos) for casa in row]
         else:
             [print(casa, end=" ") for casa in row]
+
+        
         # Ao final de cada linha, é impresso um "│ " (Não tem um espaço antes, pois na impressão anterior, o último termo já tem um espaço no final).
         print("║ ")
         # Aumenta uma undiade no contador, para que cada linha tenha impresso o seu número correto.
@@ -149,26 +166,33 @@ if __name__ == "__main__":
     #######################################################################################
 
     for i in range(0,1000):
-        imprime_tabuleiro(_tab, peca_colorida=True)
+        # Imprime Inicialmente
+        imprime_tabuleiro(_tab, colorir=True)
 
-        # Testando funcionalidade de escolher qual peça quero mexer. (OK)
+        # Funcionalidade de escolher qual peça quero mexer. (OK)
         par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
 
+        # Recebe a coordenada e captura a casa
         casa = _tab.procura_casa((par_coord[0], par_coord[1]))
         if not casa.livre:  # Se não está livre, então tem peça
 
-            peca = casa.peca  # Tenho agora a peça que eu selecionei
-            print(peca)
-
+            # Tenho agora a peça que eu selecionei
+            peca = casa.peca
+            
+            # Retorna as possibilidades de movimento
             lista_possibilidades = peca.calcula_movimento()
 
+            clear_cmd()
+            imprime_tabuleiro(_tab, colorir=True, lista_movimentos=lista_possibilidades)
+
+            # Seleção da posição para qual eu desejo mover a peça.
             contador = 1
             for i in lista_possibilidades:
                 print(f"{contador} - {i}")
                 contador+=1
-
             opt = int(input("Opção >> "))
 
+            # Efetivamente move a peça
             peca.mover_peca(lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1])
 
             casa.desocupar_casa()
