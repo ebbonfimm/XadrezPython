@@ -1,7 +1,8 @@
 from tabuleiro import Tabuleiro
 from casa import Casa
 from peca import Peca, Peao, Torre, Rei, Dama, Cavalo, Bispo
-from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas, teste_mapeamento_posicao_inicial_pecas
+from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
+from dados_cenarios import *
 from cores import coresterminal as ct
 
 import os
@@ -31,7 +32,6 @@ def print_casa_colorida(casa: Casa, lista_movimentos):
     result = casa.__str__()
 
     print(ct.AZUL + result + ct.FINAL if casa.peca != None and casa.coordenada in lista_movimentos else casa, end=" ")
-
 
 
 def inicializa_pecas(
@@ -162,7 +162,7 @@ if __name__ == "__main__":
         # =============================================================================================
         # Cria as peças com os dados de TESTE
         # =============================================================================================
-        pecas_criadas = inicializa_pecas(depara_posicao_inicial=teste_mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
+        pecas_criadas = inicializa_pecas(depara_posicao_inicial=mapeamento_cenario_2, depara_icones=mapeamento_icone_pecas)
     else:
         # =============================================================================================
         # Cria as peças com a posição REAL
