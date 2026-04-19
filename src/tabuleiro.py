@@ -17,6 +17,17 @@ class Tabuleiro:
         x = coordenada[0]
         y = coordenada[1]
         return self.tabuleiro[y][x]
+    
+    
+    def calcula_casas_ocupadas(self):
+        casas = []
+        for x in self.tabuleiro:
+            for y in x:
+                if not y.livre: casas.append(y)
+
+        return casas
+        
+
 
 
     def __str__(self):

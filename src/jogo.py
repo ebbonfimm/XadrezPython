@@ -35,7 +35,7 @@ def print_casa_colorida(casa: Casa, lista_movimentos):
 
 
 def inicializa_pecas(
-        depara_posicao_inicial: dict[list[int, int]], 
+        depara_posicao_inicial: dict[list[int, int]],
         depara_icones: dict[list[str, str]]
     ) -> list[Peca]:
     """_summary_
@@ -60,7 +60,7 @@ def inicializa_pecas(
         icone = depara_icones[list(depara_icones.keys())[indice_icone]]
 
         tipo_da_peca = id[0]
-        dados_objeto = [id, depara_posicao_inicial[id][1], depara_posicao_inicial[id][0], icone[0 if id[1] == "P" else 1]]
+        dados_objeto = [id, depara_posicao_inicial[id][0], depara_posicao_inicial[id][1], icone[0 if id[1] == "P" else 1]]
 
         # Define qual é a classe que deverá ser utilizada, dependendo da nomenclatura da peça.
         if tipo_da_peca == "T": obj_peca = Torre(*dados_objeto)
@@ -144,48 +144,74 @@ def captura_coordenada(texto: str) -> list[int, int]:
 
 if __name__ == "__main__":
 
+    # =======================================
+    # LIMPEZA DA TELA
+    # =======================================
     clear_cmd()
 
+    # Inicializa um Tabuleiro Vazio
     tab = Tabuleiro()
 
-    # == DESCOMENTAR=ASSIM=QUE=NÃO=ESTIVER=MAIS=TESTANDO===========================================
+    # =============================================================================================
+    # INICIALIZA DAS PEÇAS DO XADREZ
     # Cria as peças, retornando uma lista com todas elas (Lista de objetos do tipo Peca).
-
-    # pecas_criadas = inicializa_pecas(depara_posicao_inicial=mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
     # =============================================================================================
+    PECAS_TESTE = True
 
+    if PECAS_TESTE:
+        # =============================================================================================
+        # Cria as peças com os dados de TESTE
+        # =============================================================================================
+        pecas_criadas = inicializa_pecas(depara_posicao_inicial=teste_mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
+    else:
+        # =============================================================================================
+        # Cria as peças com a posição REAL
+        # =============================================================================================
+        pecas_criadas = inicializa_pecas(depara_posicao_inicial=mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
 
     # =============================================================================================
-    # Cria as peças com os dados de TESTE
-    pecas_criadas = inicializa_pecas(depara_posicao_inicial=teste_mapeamento_posicao_inicial_pecas, depara_icones=mapeamento_icone_pecas)
+    # PREENCHIMENTO DO TABULEIRO
+    # Posiciona as peças na coordenada inicial, retornando um tabuleiro preenchido.
     # =============================================================================================
-
-    # # Posiciona as peças na coordenada inicial, retornando um tabuleiro preenchido.
     _tab = preenche_tabuleiro(tab, pecas_criadas)
 
-    #######################################################################################
-
+    # =============================================================================================
+    # ITERAÇÃO DA PARTIDA
+    # =============================================================================================
     for i in range(0,1000):
+        
+        clear_cmd()
+
         # Imprime Inicialmente
         imprime_tabuleiro(_tab, colorir=True)
 
-        # Funcionalidade de escolher qual peça quero mexer. (OK)
+        # Testando casas ocupadas:
+        obj_casas_ocupadas = _tab.calcula_casas_ocupadas()
+        coordenada_casas_ocupadas = [casa.coordenada for casa in obj_casas_ocupadas]
+
+        # =============================================================================================
+        # MOVIMENTAÇÃO DAS PEÇAS
+        # =============================================================================================
+        # Jogador seleciona a peça que deseja mover
         par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
 
-        # Recebe a coordenada e captura a casa
+        # Procura a casa que o jogador informou e verifica se há uma peça
         casa = _tab.procura_casa((par_coord[0], par_coord[1]))
         if not casa.livre:  # Se não está livre, então tem peça
 
-            # Tenho agora a peça que eu selecionei
+            # Peça Selecionada
             peca = casa.peca
-            
-            # Retorna as possibilidades de movimento
-            lista_possibilidades = peca.calcula_movimento()
+            # Calcula as possibilidades de movimento
+            lista_possibilidades = peca.calcula_movimento(coordenada_casas_ocupadas)
 
-            clear_cmd()
+            # =======================================
+            # LIMPEZA DA TELA
+            # =======================================
+            # clear_cmd()
             imprime_tabuleiro(_tab, colorir=True, lista_movimentos=lista_possibilidades)
 
-            # Seleção da posição para qual eu desejo mover a peça.
+            # Imprime as possibilidades calculadas pelas peças
+            # Recebe a opção de movimento do jogador
             contador = 1
             for i in lista_possibilidades:
                 print(f"{contador} - {i}")
@@ -194,11 +220,16 @@ if __name__ == "__main__":
 
             # Efetivamente move a peça
             peca.mover_peca(lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1])
-
             casa.desocupar_casa()
-
             nova_casa = _tab.procura_casa((lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1]))
             nova_casa.ocupar_casa(peca)
 
+            # =======================================
+            # LIMPEZA DA TELA
+            # =======================================
             clear_cmd()
+        else:
+            # Utilizo o método input para o código ficar parado esperando a interação do usuário.
+            input(f"Peça não encontrada na posição: {par_coord} >> ")
+            pass
     

@@ -71,7 +71,7 @@ class Casa:
         Returns:
             str: Texto contendo a situação, Coordenada e peça
         """
-        return f"{"Livre" if self.livre else "Ocupada"} | Coordenada: ({self.pos_x}, {self.pos_y}) | Peça: {self.peca.icone if self.peca else None}"
+        return f"Coordenada: ({self.pos_x}, {self.pos_y}) | {"Livre" if self.livre else "Ocupada"} | Peça: {self.peca.icone if self.peca else None}"
 
 
     def __str__(self):
