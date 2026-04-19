@@ -26,15 +26,15 @@ Bom, de maneira geral essas são as regras.
 ### Funcionalidades a serem implementadas
 
 - [x] Movimentos das peças
+- [ ] Colisão
 - [ ] "Castling" ou Roque
 - [ ] Promoção do Peão
-- [ ] Colisão
 - [ ] Cheque e Cheque Mate
 - [ ] Remoção de peças do adversário
 - [ ] Interação com o jogador
 - [ ] Coordenadas Alfanuméricas
 
-### Referência
+### Referências
 
 - https://www.fide.com/FIDE/handbook/LawsOfChess.pdf
 - https://www.chess.com/learn-how-to-play-chess
