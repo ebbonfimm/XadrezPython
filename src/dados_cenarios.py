@@ -10,5 +10,10 @@ mapeamento_cenario_1 = {
 
 
 mapeamento_cenario_2 = {
-    'CB0': [3, 5],
+    'CB0': [1, 5],
+    'PB0': [3, 4],
+    'PB1': [3, 6],
+
+    'PP1': [2, 3],
+    'PP2': [1, 4],
 }
