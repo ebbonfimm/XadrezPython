@@ -17,3 +17,12 @@ mapeamento_cenario_2 = {
     'PP1': [2, 3],
     'PP2': [1, 4],
 }
+
+
+mapeamento_cenario_3 = {
+    'PB0': [3, 5],
+    'PB1': [3, 4],
+
+    'PP0': [3, 3]
+
+}
