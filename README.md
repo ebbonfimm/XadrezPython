@@ -27,10 +27,10 @@ Bom, de maneira geral essas são as regras.
 
 - [x] Movimentos das peças
 - [ ] Colisão
+- [ ] Remoção de peças do adversário
 - [ ] "Castling" ou Roque
 - [ ] Promoção do Peão
 - [ ] Cheque e Cheque Mate
-- [ ] Remoção de peças do adversário
 - [ ] Interação com o jogador
 - [ ] Coordenadas Alfanuméricas
 

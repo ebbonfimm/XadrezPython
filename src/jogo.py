@@ -1,14 +1,16 @@
-from tabuleiro import Tabuleiro
-from casa import Casa
-from peca import Peca, Peao, Torre, Rei, Dama, Cavalo, Bispo
-from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
-from dados_cenarios import *
-from cores import coresterminal as ct
-
+# Biblioteca Integradas
 import os
 
+# Módulos Internos
+from casa import Casa
+from tabuleiro import Tabuleiro
+from peca import Peca, Peao, Torre, Rei, Dama, Cavalo, Bispo
+from cores import coresterminal as ct
+from dados import mapeamento_posicao_inicial_pecas, mapeamento_icone_pecas
+from dados_cenarios import *
 
-def clear_cmd():
+
+def clear_cmd()-> None:
     os.system('cls')
 
 
@@ -156,13 +158,14 @@ if __name__ == "__main__":
     # INICIALIZA DAS PEÇAS DO XADREZ
     # Cria as peças, retornando uma lista com todas elas (Lista de objetos do tipo Peca).
     # =============================================================================================
-    PECAS_TESTE = True
+    PECAS_TESTE = 1
 
     if PECAS_TESTE:
         # =============================================================================================
         # Cria as peças com os dados de TESTE
         # =============================================================================================
-        pecas_criadas = inicializa_pecas(depara_posicao_inicial=mapeamento_cenario_2, depara_icones=mapeamento_icone_pecas)
+        _CENARIO = mapeamento_cenario_2
+        pecas_criadas = inicializa_pecas(depara_posicao_inicial=_CENARIO, depara_icones=mapeamento_icone_pecas)
     else:
         # =============================================================================================
         # Cria as peças com a posição REAL
@@ -180,34 +183,38 @@ if __name__ == "__main__":
     # =============================================================================================
     for i in range(0,1000):
         
+        # =======================================
+        # LIMPEZA DA TELA
+        # =======================================
         clear_cmd()
 
         # Imprime Inicialmente
         imprime_tabuleiro(_tab, colorir=True)
 
         # Testando casas ocupadas:
-        obj_casas_ocupadas = _tab.calcula_casas_ocupadas()
-        coordenada_casas_ocupadas = [casa.coordenada for casa in obj_casas_ocupadas]
+        coordenda_casas_ocupadas = _tab.calcula_casas_ocupadas()
+        print(coordenda_casas_ocupadas)
 
         # =============================================================================================
         # MOVIMENTAÇÃO DAS PEÇAS
-        # =============================================================================================
         # Jogador seleciona a peça que deseja mover
+        # =============================================================================================
         par_coord = captura_coordenada("Informe a posição da peça que deseja mexer:")
 
         # Procura a casa que o jogador informou e verifica se há uma peça
         casa = _tab.procura_casa((par_coord[0], par_coord[1]))
         if not casa.livre:  # Se não está livre, então tem peça
 
-            # Peça Selecionada
-            peca = casa.peca
-            # Calcula as possibilidades de movimento
-            lista_possibilidades = peca.calcula_movimento(coordenada_casas_ocupadas)
-
             # =======================================
             # LIMPEZA DA TELA
             # =======================================
-            # clear_cmd()
+            clear_cmd()
+
+            # Peça Selecionada
+            peca = casa.peca
+            # Calcula as possibilidades de movimento
+            lista_possibilidades = peca.calcula_movimento(coordenda_casas_ocupadas)
+
             imprime_tabuleiro(_tab, colorir=True, lista_movimentos=lista_possibilidades)
 
             # Imprime as possibilidades calculadas pelas peças
@@ -228,6 +235,7 @@ if __name__ == "__main__":
             # LIMPEZA DA TELA
             # =======================================
             clear_cmd()
+
         else:
             # Utilizo o método input para o código ficar parado esperando a interação do usuário.
             input(f"Peça não encontrada na posição: {par_coord} >> ")
