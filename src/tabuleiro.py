@@ -19,11 +19,12 @@ class Tabuleiro:
         return self.tabuleiro[y][x]
     
     
-    def calcula_casas_ocupadas(self):
-        casas = []
-        for x in self.tabuleiro:
-            for y in x:
-                if not y.livre: casas.append(y)
+    def calcula_casas_ocupadas(self) -> dict:
+        casas = {0: [], 1: []}
+
+        for linha in self.tabuleiro:
+            for casa in linha:
+                if not casa.livre: casas[casa.peca.cor].append(casa.coordenada)
 
         return casas
         

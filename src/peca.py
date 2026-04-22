@@ -1,4 +1,5 @@
 class Peca:
+
     def __init__(self, id, pos_x, pos_y, icone):
         self.id = id  # Formato NOME-COR-NUMERO
         self.pos_x = pos_x
@@ -135,7 +136,7 @@ class Cavalo(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
 
-    def calcula_movimento(self):
+    def calcula_movimento(self, casas_ocupadas: list) -> list[list[int, int]]:
         """Regra de movimento do Cavalo
         Observação: Por ser a regra mais complexa das peças, vou considerar um certo grau de entendimento do processo de desenho da regra para descrever.
         
@@ -162,10 +163,15 @@ class Cavalo(Peca):
             if i[0] == self.pos_x:
                 movimentos.append([i[0]-1, i[1]])
                 movimentos.append([i[0]+1, i[1]])
-            
+        
             else:
                 movimentos.append([i[0], i[1]-1])
                 movimentos.append([i[0], i[1]+1])
+
+        # Removendo Posições ocupadas.
+        for casa in casas_ocupadas[self.cor]:
+            if casa in movimentos:
+                movimentos.remove(casa)
             
         return super().calcula_movimento(movimentos)
 
@@ -259,7 +265,7 @@ class Rei(Peca):
         super().__init__(id, pos_x, pos_y, icone)
 
     
-    def calcula_movimento(self) -> list[list[int, int]]:
+    def calcula_movimento(self, casas_ocupadas: list) -> list[list[int, int]]:
         """Regra de movimento do Rei
         - O rei pode andar 1 casa para qualquer direção
         - Sendo assim, é gerada uma matriz 3 x 3 com todas as casas ao redor do Rei. É feita uma iteração com complexidade O(n²) para gerar as 9 posições.
@@ -274,6 +280,11 @@ class Rei(Peca):
             for y in range(self.pos_y - 1, self.pos_y + 2):
 
                 movimentos.append([x, y])
+
+        # Removendo Posições ocupadas.
+        for casa in casas_ocupadas[self.cor]:
+            if casa in movimentos:
+                movimentos.remove(casa)
 
         return super().calcula_movimento(movimentos)
 
@@ -299,9 +310,8 @@ class Torre(Peca):
         
         movimentos = [*movs_vertical, *movs_horizontal]
 
+
         return super().calcula_movimento(movimentos)
     
-
-
 
     
