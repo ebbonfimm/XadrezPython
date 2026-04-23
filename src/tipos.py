@@ -1,0 +1,1 @@
+type tCoordenada = list[int, int]
