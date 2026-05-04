@@ -9,32 +9,36 @@ O Objetivo em questão é replicar o jogo Xadrez, possibilitando jogar através 
 
 Estipulei algumas regras para esse projeto:
 
-- O Jogo deve ser implementado de forma integral, ou seja, replicar todas as regras presentes no jogo original.
-- Os princípios de modularidade e os princípios SOLID devem ser utilizados seguindo fielmente as suas definições.
-- Não é permitido utilizar inteligência artificial para escrever trechos do código, ao invés disso, cabe a mim ir proativamente buscar os conceitos na internet, com o objetivo de fixar melhor os conceitos que não sei completamente.
-- O jogo deve ser escrito em Português (pt-BR), para agregar no repositório nacional de códigos em Python.
-- O código deve estar bem comentado, para que seja claro a qualquer um que tente compreender o seu funcionamento. A documentação deve incluir a UML, bem como comentários e "type annotations" nas classes, métodos e variáveis.
-- O código deve seguir ao máximo as regras do PEP8 (de escrita de código em Python)
+* O Jogo deve ser implementado de forma integral, ou seja, replicar todas as regras presentes no jogo original.
+* Os princípios de modularidade e os princípios SOLID devem ser utilizados seguindo fielmente as suas definições.
+* Não é permitido utilizar inteligência artificial para escrever trechos do código, ao invés disso, cabe a mim ir proativamente buscar os conceitos na internet, com o objetivo de fixar melhor os conceitos que não sei completamente.
+* O jogo deve ser escrito em Português (pt-BR), para agregar no repositório nacional de códigos em Python.
+* O código deve estar bem comentado, para que seja claro a qualquer um que tente compreender o seu funcionamento. A documentação deve incluir a UML, bem como comentários e "type annotations" nas classes, métodos e variáveis.
+* O código deve seguir ao máximo as regras do PEP8 (de escrita de código em Python)
 
 Bom, de maneira geral essas são as regras.
 
 ## Para as cores:
 
-- 0 -> Casa Branca
-- 1 -> Casa Preta
+* 0 -> Casa Branca
+* 1 -> Casa Preta
 
 ### Funcionalidades a serem implementadas
 
-- [x] Movimentos das peças
-- [ ] Colisão
-- [ ] Remoção de peças do adversário
-- [ ] "Castling" ou Roque
-- [ ] Promoção do Peão
-- [ ] Cheque e Cheque Mate
-- [ ] Interação com o jogador
-- [ ] Coordenadas Alfanuméricas
+* \[x] Movimentos das peças
+* \[ ] Colisão
+* \[ ] Remoção de peças do adversário
+* \[ ] "Castling" ou Roque
+* \[ ] Promoção do Peão
+* \[ ] Cheque e Cheque Mate
+* \[ ] Interação com o jogador
+* \[ ] Coordenadas Alfanuméricas
+* \[ ] Afogamento
 
 ### Referências
 
-- https://www.fide.com/FIDE/handbook/LawsOfChess.pdf
-- https://www.chess.com/learn-how-to-play-chess
+* https://www.fide.com/FIDE/handbook/LawsOfChess.pdf
+* https://www.chess.com/learn-how-to-play-chess
+* https://www.youtube.com/watch?v=ldBblesoYFQ
+* https://www.reddit.com/r/Chesscom/comments/1sxyzz0/why\_is\_this\_a\_brilliant\_move/
+
