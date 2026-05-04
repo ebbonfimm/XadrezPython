@@ -164,9 +164,9 @@ if __name__ == "__main__":
         # =============================================================================================
         # Cria as peças com os dados de TESTE
         # =============================================================================================
-        _CENARIO = mapeamento_cenario_2
+        _CENARIO = mapeamento_cenario_4
         pecas_criadas = inicializa_pecas(depara_posicao_inicial=_CENARIO, depara_icones=mapeamento_icone_pecas)
-    else:
+    else: 
         # =============================================================================================
         # Cria as peças com a posição REAL
         # =============================================================================================
@@ -193,7 +193,7 @@ if __name__ == "__main__":
 
         # Testando casas ocupadas:
         coordenda_casas_ocupadas = _tab.calcula_casas_ocupadas()
-        print(coordenda_casas_ocupadas)
+        # print(coordenda_casas_ocupadas)
 
         # =============================================================================================
         # MOVIMENTAÇÃO DAS PEÇAS
@@ -217,13 +217,17 @@ if __name__ == "__main__":
 
             imprime_tabuleiro(_tab, colorir=True, lista_movimentos=lista_possibilidades)
 
-            # Imprime as possibilidades calculadas pelas peças
-            # Recebe a opção de movimento do jogador
-            contador = 1
-            for i in lista_possibilidades:
-                print(f"{contador} - {i}")
-                contador+=1
-            opt = int(input("Opção >> "))
+            if lista_possibilidades:
+                # Imprime as possibilidades calculadas pelas peças
+                # Recebe a opção de movimento do jogador
+                contador = 1
+                for i in lista_possibilidades:
+                    print(f"{contador} - {i}")
+                    contador+=1
+                opt = int(input("Opção >> "))
+            else:
+                input("Não há movimentos possíveis para esta peça...")
+                continue
 
             # Efetivamente move a peça
             peca.mover_peca(lista_possibilidades[opt-1][0], lista_possibilidades[opt-1][1])
@@ -239,5 +243,5 @@ if __name__ == "__main__":
         else:
             # Utilizo o método input para o código ficar parado esperando a interação do usuário.
             input(f"Peça não encontrada na posição: {par_coord} >> ")
-            pass
+            continue
     

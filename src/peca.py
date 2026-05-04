@@ -1,4 +1,9 @@
+from tipos import tCoordenada
+from movimento import Movimento
+
 class Peca:
+
+    movimento = Movimento()
 
     def __init__(self, id, pos_x, pos_y, icone):
         self.id = id  # Formato NOME-COR-NUMERO
@@ -100,7 +105,7 @@ class Peao(Peca):
         super().__init__(id, pos_x, pos_y, icone)
 
 
-    def calcula_movimento(self) -> list[list[int, int]]:
+    def calcula_movimento(self, casas_ocupadas: list) -> list[list[int, int]]:
         """Regra de movimento do Peão:
         - Não pode retroagir
         - Se a peça, naquele momento, estiver na casa inicial, o Peão pode andar 1 ou 2 casas
@@ -113,9 +118,10 @@ class Peao(Peca):
 
         movimentos = []
 
+        iterador = range(1, 3)
+
+        # Primeiro movimento
         if self.casa_inicial:
-            iterador = range(1, 3)
-            
             if self.cor == 0:  # Caso a cor seja branca, a peça só pode avançar no tabuleiro "para cima".
                 for i in iterador:
                     movimentos.append([self.pos_x, self.pos_y-i])
@@ -123,11 +129,25 @@ class Peao(Peca):
                 for i in iterador:
                     movimentos.append([self.pos_x, self.pos_y+i])
         
+        # Movimentos Seguintes
         else:
-            if self.cor == 0:
+            if self.cor == 0:  # Caso a cor seja branca, a peça só pode avançar no tabuleiro "para cima".
                 movimentos.append([self.pos_x, self.pos_y-1])
             else:
                 movimentos.append([self.pos_x, self.pos_y+1])
+
+        # Removendo Posições ocupadas.
+        for casa in [*casas_ocupadas[0], *casas_ocupadas[1]]:
+            
+            # Verifica se tem uma peça imediamente a frente
+            if casa in [[self.pos_x, self.pos_y + 1], [self.pos_x, self.pos_y - 1]]:
+                movimentos = []
+            
+            # No primeiro movimento, caso calcule um movimento que já tem uma peça
+            # Aqui é retirado este caso
+            elif casa in movimentos:
+                movimentos.remove(casa)
+
 
         return super().calcula_movimento(movimentos)
 
@@ -135,6 +155,7 @@ class Peao(Peca):
 class Cavalo(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
+
 
     def calcula_movimento(self, casas_ocupadas: list) -> list[list[int, int]]:
         """Regra de movimento do Cavalo
@@ -200,22 +221,7 @@ class Bispo(Peca):
             list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com um número variado de posições calculadas)
         """
 
-        movimentos = []
-
-        limite_atual = 1
-        limite_maximo = 7
-
-        while limite_atual <= limite_maximo:
-            superior_esquerda = [self.pos_x - limite_atual, self.pos_y - limite_atual]
-            superior_direita = [self.pos_x + limite_atual, self.pos_y - limite_atual]
-            inferior_esquerda = [self.pos_x - limite_atual, self.pos_y + limite_atual]
-            inferior_direita = [self.pos_x + limite_atual, self.pos_y + limite_atual]
-
-            movimentos_propagados = [superior_esquerda, superior_direita, inferior_esquerda, inferior_direita]
-            
-            [movimentos.append(mov) for mov in movimentos_propagados]
-
-            limite_atual+=1
+        movimentos = self.movimento.calcula_movimento_diagonal(self.coordenada)
 
         return super().calcula_movimento(movimentos)
 
@@ -223,6 +229,7 @@ class Bispo(Peca):
 class Dama(Peca):
     def __init__(self, id, pos_x, pos_y, icone):
         super().__init__(id, pos_x, pos_y, icone)
+
 
     def calcula_movimento(self):
         """Regra de movimento da Dama
@@ -235,27 +242,10 @@ class Dama(Peca):
 
         movimentos = []
 
-        # Réplica do código Torre.calcula_movimento
-        movs_horizontal = [[i, self.pos_y] for i in range(0, 8)]
-        movs_vertical = [[self.pos_x, i] for i in range(0, 8)]
-        
-        movimentos = [*movs_vertical, *movs_horizontal]
+        movimento_retilinio = self.movimento.calcula_movimento_retilinio(self.coordenada)
+        movimento_diagonal = self.movimento.calcula_movimento_diagonal(self.coordenada)
 
-        # Réplica do código Bispo.calcula_movimento
-        limite_atual = 1
-        limite_maximo = 7
-
-        while limite_atual <= limite_maximo:
-            superior_esquerda = [self.pos_x - limite_atual, self.pos_y - limite_atual]
-            superior_direita = [self.pos_x + limite_atual, self.pos_y - limite_atual]
-            inferior_esquerda = [self.pos_x - limite_atual, self.pos_y + limite_atual]
-            inferior_direita = [self.pos_x + limite_atual, self.pos_y + limite_atual]
-
-            movimentos_propagados = [superior_esquerda, superior_direita, inferior_esquerda, inferior_direita]
-            
-            [movimentos.append(mov) for mov in movimentos_propagados]
-
-            limite_atual+=1
+        movimentos = [*movimento_retilinio, *movimento_diagonal]
 
         return super().calcula_movimento(movimentos)
 
@@ -294,7 +284,7 @@ class Torre(Peca):
         super().__init__(id, pos_x, pos_y, icone)
 
      
-    def calcula_movimento(self) -> list[list[int, int]]:
+    def calcula_movimento(self, casas_ocupadas: list[tCoordenada]) -> list[list[int, int]]:
         """Regras de movimento da Torre
         - A torre pode caminhar em movimento retilínio.
         - Sendo assim, são gerados 2 vetores com 8 posições, sendo elas:
@@ -305,11 +295,12 @@ class Torre(Peca):
             list[list[int, int]]: Movimentos gerados pela regra de movimentação da peça. PODE CONTER MOVIMENTOS INVÁLIDOS. (Vetor com 16 posições calculadas)
         """
 
+        # movimentos = self.movimento.calcula_movimento_retilinio(self.coordenada)
+
         movs_horizontal = [[i, self.pos_y] for i in range(0, 8)]
         movs_vertical = [[self.pos_x, i] for i in range(0, 8)]
         
         movimentos = [*movs_vertical, *movs_horizontal]
-
 
         return super().calcula_movimento(movimentos)
     
